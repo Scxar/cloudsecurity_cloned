@@ -16,6 +16,14 @@ namespace molnsakerhet
             builder.Services.AddDbContext<AppDbContext>(options => 
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+            // >> Om ni kör SQL Server använd .UseSqlServer
+            // lägg till i appsettings.json = "Server=localhost;Database=databasnamn;Integrated Security=True;"
+            //
+
+            //builder.Services.AddDbContext<AppDbContext>(options =>
+            //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
