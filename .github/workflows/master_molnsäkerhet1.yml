@@ -50,7 +50,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'Molnsäkerhet1'
+          app-name: 'Molnsäkerhet'
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_269CCA4669B746E7ADED6437B1BE7C3B }}
