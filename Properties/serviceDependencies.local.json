@@ -1,8 +1,12 @@
 {
   "dependencies": {
-    "postgresql1": {
-      "ignored": "true",
-      "type": "postgresql"
+    "sqlserver1": {
+      "ignored": "false",
+      "type": "sqlserver",
+      "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost;Database=testdb;Integrated Security=True;Host=localhost;Username=scxar;Password=losenord123"
+        // "Server=localhost;Database=testdb;Integrated Security=True;" för SQL Server
+      }
     }
   }
 }
