@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using molnsakerhet.Data;
 
 #nullable disable
@@ -20,33 +19,35 @@ namespace molnsakerhet.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128); // Ändrat till 128 för SQL Server
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            // Ta bort PostgreSQL-specifik konfiguration
+            // Om det fanns anrop till PostgreSQL-specifika metoder här, ta bort dem
 
             modelBuilder.Entity("molnsakerhet.Models.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+            {
+                b.Property<int>("ProductId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int"); // Ändrat från "integer" till "int"
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
+                // Ta bort Npgsql-specifik kolumnidentitet
+                // b.Property<int>("ProductId").UseIdentityByDefaultColumn() 
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)"); // Ändrat till nvarchar(max) för SQL Server
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)"); // Ändrat till nvarchar(max) för SQL Server
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18, 2)"); // Ändrat till decimal(18, 2) för SQL Server
 
-                    b.HasKey("ProductId");
+                b.HasKey("ProductId");
 
-                    b.ToTable("Products");
-                });
+                b.ToTable("Products");
+            });
 #pragma warning restore 612, 618
         }
     }
